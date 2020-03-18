@@ -1,0 +1,96 @@
+﻿@using System.Web.Optimization;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>eUseSystem | @ViewBag.Title </title>
+    @Styles.Render("~/bundles/bootstrap/css")
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="inregistrare.html">Inregistrare</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="intrebare.html">Aveti o intrebare?</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container pt-5">
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Nume</label>
+                        <input type="nume" class="form-control" id="username" placeholder="Nume">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Parola</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark">Submit</button>
+                </div>
+
+                <div class="col-md-6 ">
+                    <h2 style="text-align: center">De ce sa te inregistrezi?</h2>
+                    <ul>
+                        <li>
+                            <a>1)Primul motiv</a>
+                        </li>
+                        <li>
+                            <a>2)Al 2 lea motiv motiv</a>
+                        </li>
+                        <li>
+                            <a>3)...</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer class="page-footer pt-5">
+        <div class="container-fluid text-center text-md-left" style="background-color: #e9ecef;">
+            <div class="row pt-3">
+                <p></p>
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Here you can use rows and columns to organize your footer content.</p>
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Date de contact</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase">Parteneri</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
