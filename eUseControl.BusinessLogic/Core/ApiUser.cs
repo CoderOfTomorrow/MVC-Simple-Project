@@ -6,5 +6,10 @@
         {
             return true;
         }
+
+        public UserLoginData()
+        {
+            return 1;
+        }
     }
 }
