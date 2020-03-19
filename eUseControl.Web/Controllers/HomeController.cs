@@ -9,14 +9,9 @@ namespace eUseControl.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            UserData u = new UserData();
+            /*UserData u = new UserData();
             u.Username = "Nicu";
-            u.Products = new List<string> { "One #1", "One #2", "One #3" };
-            return View(u);
-        }
-
-        public ActionResult Register()
-        {
+            u.Products = new List<string> { "One #1", "One #2", "One #3" };*/
             return View();
         }
     }

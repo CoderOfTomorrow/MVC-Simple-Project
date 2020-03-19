@@ -12,5 +12,10 @@ namespace eUseControl.BusinessLogic
         {
             return new SessionBL();
         }
+
+        public IRegister GetRegisterBL()
+        {
+            return new RegisterBL();
+        }
     }
 }

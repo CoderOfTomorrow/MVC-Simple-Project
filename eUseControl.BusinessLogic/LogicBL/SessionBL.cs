@@ -1,8 +1,5 @@
 ﻿using eUseControl.BusinessLogic.Core;
 using eUseControl.BusinessLogic.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace eUseControl.BusinessLogic.LogicBL
 {
@@ -10,7 +7,7 @@ namespace eUseControl.BusinessLogic.LogicBL
     {
         public bool GetUserSessionStatus()
         {
-            return UserSessionStatus();
+            return true;
         }
     }
 }

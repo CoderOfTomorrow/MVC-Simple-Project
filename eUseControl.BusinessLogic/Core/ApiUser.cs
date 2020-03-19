@@ -1,15 +1,25 @@
-﻿namespace eUseControl.BusinessLogic.Core
+﻿using System.Linq;
+using eUseControl.BusinessLogic.DBModel;
+using eUseControl.Domain.Entites.User;
+
+namespace eUseControl.BusinessLogic.Core
 {
     public class ApiUser
     {
-        public bool UserSessionStatus()
+        internal URegisterResp UserRegisterAction(URegisterData data)
         {
-            return true;
-        }
+            UDbTable new_user = new UDbTable();
 
-        public UserLoginData()
-        {
-            return 1;
+            using (var todo = new UserContext())
+            {
+                new_user.Username = data.Nume;
+                new_user.Password = data.Parola;
+                new_user.Email = data.Email;
+
+                todo.Users.Add(new_user);
+                todo.SaveChanges();
+            }
+            return new URegisterResp();
         }
     }
 }
