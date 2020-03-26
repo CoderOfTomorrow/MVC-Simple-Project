@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace eUseControl.Domain.Entites.User
+namespace eUseControl.Web.Models
 {
-    public class ULoginData
+    public class UserLogin
     {
         public string Credential { get; set; }
         public string Password { get; set; }

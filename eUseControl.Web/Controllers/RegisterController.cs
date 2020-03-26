@@ -12,8 +12,8 @@ namespace eUseControl.Web.Controllers
         // GET: Login
         public RegisterController()
         {
-            var re = new BusinessLogic.BusinessLogic();
-            _register = re.GetRegisterBL();
+            var bl = new BusinessLogic.BusinessLogic();
+            _register = bl.GetRegisterBL();
         }
 
         public ActionResult Index()
@@ -33,7 +33,7 @@ namespace eUseControl.Web.Controllers
 
             _register.UserRegister(data);
 
-            return View();
+            return RedirectToAction("Index","Home");
         }
     }
 }

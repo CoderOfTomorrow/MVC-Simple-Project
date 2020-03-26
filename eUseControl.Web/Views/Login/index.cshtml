@@ -7,13 +7,13 @@
 @model eUseControl.Web.Models.UserRegister
 
 <div class="container-center" style="margin:auto  auto 0">
-    <div class="view-header" >
+    <div class="view-header">
         <div class="header-icon">
             <i class="pe page-header-icon pe-7s-unlock"></i>
         </div>
         <div class="header-title">
-            <h3 >Register</h3>
-            
+            <h3>Register</h3>
+
         </div>
     </div>
 
@@ -51,28 +51,12 @@
                     })
                     <span class="help-block small">Your strong password</span>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Email, new
-                    {
-                        placeholder = "...",
-                        title = "Introduceti email-ul",
-                        value = "",
-                        name = "email",
-                        id = "email",
-                        type="email",
-                        @class = "form-control"
-                    })
-                    <span class="help-block small">Your strong password</span>
-                </div>
                 <div style="text-align:center">
                     <button type="submit" class="btn btn-outline-dark">Submit</button>
-                    <a class="btn btn btn-outline-dark" href="Login">Logare</a>
-                    <a class="btn btn btn-outline-dark" href="Home">Home</a>
+                    <a class="btn btn btn-outline-dark" href="Login">Register</a>
+                    <a class="btn btn btn-outline-dark" href="Home/index.cshtml">Home</a>
                 </div>
             }
         </div>
     </div>
 </div>
-
-

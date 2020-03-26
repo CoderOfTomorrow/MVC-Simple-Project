@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
 
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,24 +15,21 @@
     {@RenderSection("Styles", required: false)}
 
     <!-- Primary HOME style -->
-    
+    @Styles.Render("~/bundles/main/css")
 </head>
 
 <body style="background-color:#1A1A1D">
-    <div class="wrapper">
-        <!-- Navigation -->
-            @Html.Partial("_Navbar")
-
+    <div >
         <!-- Main view -->
-        <section class="content">
+        
             @RenderBody()
-            <!-- Footer-->
-            @Html.Partial("_Footer")
-        </section>
+        
 
         <!-- Section for main scripts render -->
+       
+
         <!-- Handler for local scripts -->
-        @RenderSection("scripts", required: false)
+        
     </div>
 </body>
 </html>

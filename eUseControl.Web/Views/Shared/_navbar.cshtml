@@ -1,8 +1,22 @@
 ﻿
-@{
-    ViewBag.Title = "_navbar";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-<h2>_navbar</h2>
-
+<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark" style="background-color:#950740">
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/Home">Acasa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Aveti o intrebare?</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav text-md-right">
+            <li class="nav-item" style="text-align:right">
+                <a class="btn btn-outline-light" href="~/Login">Autentificare</a>
+            </li>
+            <li class="nav-item" style="text-align:right">
+                <a class="btn btn-outline-light" href="~/Register">Inregistrare</a>
+            </li>
+        </ul>
+    </div>
+</nav>

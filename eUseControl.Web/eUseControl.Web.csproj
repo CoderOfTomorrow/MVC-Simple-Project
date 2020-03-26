@@ -51,6 +51,9 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -118,6 +121,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -284,7 +288,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserData.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\UserRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -308,7 +312,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Shared\_navbar.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Layout_Blank.cshtml" />
+    <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Register\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -324,17 +331,17 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.BusinessLogic\eUseControl.BusinessLogic.csproj">
-      <Project>{9e288d7f-6a25-4c42-9f87-b733d5ce67a4}</Project>
-      <Name>eUseControl.BusinessLogic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
-      <Project>{72bf28bd-cde7-4527-887d-c19216facfff}</Project>
-      <Name>eUseControl.Domain</Name>
-    </ProjectReference>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <ProjectReference Include="..\eUseControl.BusinessLogic1\eUseControl.BusinessLogic.csproj">
+      <Project>{49c8cc89-e0a9-4168-86ef-bac7294345eb}</Project>
+      <Name>eUseControl.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUseControl.d\eUseControl.Domain.csproj">
+      <Project>{add8af5b-bab1-4232-b1de-b45662a7704a}</Project>
+      <Name>eUseControl.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,8 +1,10 @@
-﻿using eUseControl.BusinessLogic.Interfaces;
+﻿using System;
+using System.Web;
+using System.Web.Mvc;
+using AutoMapper;
+using eUseControl.BusinessLogic.Interfaces;
 using eUseControl.Domain.Entites.User;
 using eUseControl.Web.Models;
-using System;
-using System.Web.Mvc;
 
 namespace eUseControl.Web.Controllers
 {
@@ -14,31 +16,29 @@ namespace eUseControl.Web.Controllers
             var bl = new BusinessLogic.BusinessLogic();
             _session = bl.GetSessionBL();
         }
+
         public ActionResult Index()
         {
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public ActionResult Index(UserData user)
+        public ActionResult Index(UserLogin login)
         {
             if (ModelState.IsValid)
             {
-                ULoginData data = new ULoginData
-                {
-                    Login = user.Login,
-                    Password = user.Password,
-                    UserIp = Request.UserHostAddress,
-                    UserLTime = DateTime.Now
-                };
+                Mapper.Initialize(cfg => cfg.CreateMap<UserLogin, ULoginData>());
+                var data = Mapper.Map<ULoginData>(login);
 
-                /*var userLogin = _session.UserLogin(data);
+                data.LoginIp = Request.UserHostAddress;
+                data.LoginDateTime = DateTime.Now;
+
+                var userLogin = _session.UserLogin(data);
                 if (userLogin.Status)
                 {
-                    //ADD COOKIE
+                    HttpCookie cookie = _session.GenCookie(login.Credential);
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -46,9 +46,9 @@ namespace eUseControl.Web.Controllers
                 {
                     ModelState.AddModelError("", userLogin.StatusMsg);
                     return View();
-                }*/
-
+                }
             }
+
             return View();
         }
     }
