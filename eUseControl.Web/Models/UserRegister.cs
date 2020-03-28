@@ -4,18 +4,14 @@ namespace eUseControl.Web.Models
 {
     public class UserRegister
     {
-        /*public string Nume { get; set; }
-        public string Parola { get; set; }
-        public string Email { get; set; }*/
-
         [Required]
-        [Display(Name = "Nume")]
-        public string Nume { get; set; }
+        [Display(Name = "Nume de utilizator")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Parola { get; set; }
+        [Display(Name = "Parola")]
+        public string Password { get; set; }
 
         [Required]
         [Display(Name = "Email")]

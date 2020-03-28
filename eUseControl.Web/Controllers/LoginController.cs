@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
 using eUseControl.BusinessLogic.Interfaces;
 using eUseControl.Domain.Entites.User;
+using eUseControl.Web.Extension;
 using eUseControl.Web.Models;
 
 namespace eUseControl.Web.Controllers
@@ -28,11 +28,13 @@ namespace eUseControl.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<UserLogin, ULoginData>());
-                var data = Mapper.Map<ULoginData>(login);
-
-                data.LoginIp = Request.UserHostAddress;
-                data.LoginDateTime = DateTime.Now;
+                ULoginData data = new ULoginData
+                {
+                    Credential = login.Credential,
+                    Password = login.Password,
+                    LoginIp = Request.UserHostAddress,
+                    LoginDateTime = DateTime.Now
+                };
 
                 var userLogin = _session.UserLogin(data);
                 if (userLogin.Status)
@@ -48,8 +50,13 @@ namespace eUseControl.Web.Controllers
                     return View();
                 }
             }
-
             return View();
+        }
+
+        public ActionResult Logout(){
+            var user = System.Web.HttpContext.Current.GetMySessionObject();
+            _session.UserLogout(user.Username);
+            return RedirectToAction("Index", "Login");
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace eUseControl.Domain.Entites.User
+﻿namespace eUseControl.Domain.Entites.User
 {
     public class ULoginResp
     {

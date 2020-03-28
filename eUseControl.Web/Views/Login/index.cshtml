@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_Layout_Blank.cshtml";
 }
 @using System.Web.Optimization;
-@model eUseControl.Web.Models.UserRegister
+@using System.Web.Mvc
+@model eUseControl.Web.Models.UserLogin
+
 
 <div class="container-center" style="margin:auto  auto 0">
     <div class="view-header">
@@ -12,7 +14,7 @@
             <i class="pe page-header-icon pe-7s-unlock"></i>
         </div>
         <div class="header-title">
-            <h3>Register</h3>
+            <h3>Login</h3>
 
         </div>
     </div>
@@ -20,12 +22,12 @@
     <div class="panel panel-filled">
         <div class="panel-body">
             @Html.ValidationSummary(true)
-            @using (Html.BeginForm("Index", "Register", FormMethod.Post, new { @id = "RegisterForm" }))
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @id = "LoginForm" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Nume, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Nume, new
+                    @Html.LabelFor(m => m.Credential, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Credential, new
                     {
                         placeholder = "...",
                         title = "Introduceti numele de utilizator",
@@ -38,8 +40,8 @@
                     <span class="help-block small">Your unique username to app</span>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Parola, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Parola, new
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Password, new
                     {
                         placeholder = "...",
                         title = "Introduceti parola",
@@ -53,8 +55,8 @@
                 </div>
                 <div style="text-align:center">
                     <button type="submit" class="btn btn-outline-dark">Submit</button>
-                    <a class="btn btn btn-outline-dark" href="Login">Register</a>
-                    <a class="btn btn btn-outline-dark" href="Home/index.cshtml">Home</a>
+                    <a class="btn btn btn-outline-dark" href="@Url.Action("Index", "Register")"">Register</a>
+                    <a class="btn btn btn-outline-dark" href="@Url.Action("Index", "Home")"">Home</a>
                 </div>
             }
         </div>

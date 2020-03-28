@@ -6,8 +6,8 @@ namespace eUseControl.Domain.Entites.User
 {
     public class URegisterData
     {
-        public string Nume { get; set; }
-        public string Parola { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
     }
 }
