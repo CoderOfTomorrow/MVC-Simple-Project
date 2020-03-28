@@ -1,17 +1,24 @@
-﻿using eUseControl.Web.Models;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using eUseControl.Web.Extension;
+using eUseControl.Web.Models;
 
 namespace eUseControl.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Home
         public ActionResult Index()
         {
-            /*UserData u = new UserData();
-            u.Username = "Nicu";
-            u.Products = new List<string> { "One #1", "One #2", "One #3" };*/
+            SessionStatus();
+            if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] == "login")
+            {
+                var user = System.Web.HttpContext.Current.GetMySessionObject();
+                UserLogin u = new UserLogin
+                {
+                    Credential = user.Username,
+                };
+                return View(u);
+            }
             return View();
         }
     }

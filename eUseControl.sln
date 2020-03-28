@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Web", "eUseControl.Web\eUseControl.Web.csproj", "{A1C35C78-C106-4245-A5AD-E0E8DB2C945D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.BusinessLogic", "eUseControl.BusinessLogic1\eUseControl.BusinessLogic.csproj", "{49C8CC89-E0A9-4168-86EF-BAC7294345EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.BusinessLogic", "eUseControl.BusinessLogic\eUseControl.BusinessLogic.csproj", "{49C8CC89-E0A9-4168-86EF-BAC7294345EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Domain", "eUseControl.d\eUseControl.Domain.csproj", "{ADD8AF5B-BAB1-4232-B1DE-B45662A7704A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Domain", "eUseControl.Domain\eUseControl.Domain.csproj", "{ADD8AF5B-BAB1-4232-B1DE-B45662A7704A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Helpers", "eUseControl.H\eUseControl.Helpers.csproj", "{95CFB784-83DF-4C42-BBF3-D29CF0751105}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUseControl.Helpers", "eUseControl.Helpers\eUseControl.Helpers.csproj", "{95CFB784-83DF-4C42-BBF3-D29CF0751105}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

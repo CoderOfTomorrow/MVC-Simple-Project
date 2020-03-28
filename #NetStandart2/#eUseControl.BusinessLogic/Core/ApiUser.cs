@@ -5,8 +5,8 @@ using System.Linq;
 using AutoMapper;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Domain.Entites.User;
+using eUseControl.Domain.Entities.User;
 using eUseControl.Helpers;
-using System.Web;
 
 namespace eUseControl.BusinessLogic.Core
 {

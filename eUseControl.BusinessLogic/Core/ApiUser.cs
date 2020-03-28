@@ -5,8 +5,8 @@ using System.Linq;
 using AutoMapper;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Domain.Entites.User;
-using eUseControl.Domain.Entities.User;
 using eUseControl.Helpers;
+using System.Web;
 
 namespace eUseControl.BusinessLogic.Core
 {
@@ -18,12 +18,12 @@ namespace eUseControl.BusinessLogic.Core
 
             using (var todo = new UserContext())
             {
-                new_user.Username = data.Nume;
-                new_user.Password = data.Parola;
+                new_user.Username = data.Username;
+                new_user.Password = LoginHelper.HashGen(data.Password);
                 new_user.Email = data.Email;
-
+                
                 todo.Users.Add(new_user);
-                todo.SaveChanges();
+                todo.SaveChanges();                
             }
             return new URegisterResp();
         }
@@ -45,13 +45,13 @@ namespace eUseControl.BusinessLogic.Core
                     return new ULoginResp { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
-                /*using (var todo = new UserContext())
+                using (var todo = new UserContext())
                 {
                     result.LasIp = data.LoginIp;
                     result.LastLogin = data.LoginDateTime;
                     todo.Entry(result).State = EntityState.Modified;
                     todo.SaveChanges();
-                }*/
+                }
 
                 return new ULoginResp { Status = true };
             }
@@ -68,13 +68,13 @@ namespace eUseControl.BusinessLogic.Core
                     return new ULoginResp { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
-                /*using (var todo = new UserContext())
+                using (var todo = new UserContext())
                 {
                     result.LasIp = data.LoginIp;
                     result.LastLogin = data.LoginDateTime;
                     todo.Entry(result).State = EntityState.Modified;
                     todo.SaveChanges();
-                }*/
+                }
 
                 return new ULoginResp { Status = true };
             }
@@ -154,6 +154,22 @@ namespace eUseControl.BusinessLogic.Core
             var userminimal = Mapper.Map<UserMinimal>(curentUser);
 
             return userminimal;
+        }
+
+        internal ULogoutResp UserLogoutAction(string user)
+        {
+            using (var db = new SessionContext())
+            {
+                Session curent;
+                curent = (from e in db.Sessions where e.Username == user select e).FirstOrDefault();
+                curent.ExpireTime = DateTime.Now.AddMinutes(-1);
+                using (var todo = new SessionContext())
+                {
+                    todo.Entry(curent).State = EntityState.Modified;
+                    todo.SaveChanges();
+                }
+            }
+            return new ULogoutResp();
         }
     }
 }

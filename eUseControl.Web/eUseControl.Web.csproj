@@ -284,10 +284,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Extension\HttpContextExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\UserRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -317,6 +321,8 @@
     <Content Include="Views\Shared\_Layout_Blank.cshtml" />
     <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Register\index.cshtml" />
+    <Content Include="Views\Home\product.cshtml" />
+    <Content Include="Views\Profile\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -334,11 +340,11 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.BusinessLogic1\eUseControl.BusinessLogic.csproj">
+    <ProjectReference Include="..\eUseControl.BusinessLogic\eUseControl.BusinessLogic.csproj">
       <Project>{49c8cc89-e0a9-4168-86ef-bac7294345eb}</Project>
       <Name>eUseControl.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eUseControl.d\eUseControl.Domain.csproj">
+    <ProjectReference Include="..\eUseControl.Domain\eUseControl.Domain.csproj">
       <Project>{add8af5b-bab1-4232-b1de-b45662a7704a}</Project>
       <Name>eUseControl.Domain</Name>
     </ProjectReference>

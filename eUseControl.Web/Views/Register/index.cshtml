@@ -19,13 +19,13 @@
 
     <div class="panel panel-filled">
         <div class="panel-body">
-            @Html.ValidationSummary(true)
+            
             @using (Html.BeginForm("Index", "Register", FormMethod.Post, new { @id = "RegisterForm" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Nume, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Nume, new
+                    @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Username, new
                     {
                         placeholder = "...",
                         title = "Introduceti numele de utilizator",
@@ -38,8 +38,8 @@
                     <span class="help-block small">Your unique username to app</span>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Parola, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Parola, new
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Password, new
                     {
                         placeholder = "...",
                         title = "Introduceti parola",

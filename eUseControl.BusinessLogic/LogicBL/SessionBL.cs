@@ -16,5 +16,15 @@ namespace eUseControl.BusinessLogic.LogicBL
         {
             return UserCookie(apiCookieValue);
         }
+
+        public HttpCookie GenCookie(string loginCredential)
+        {
+            return Cookie(loginCredential);
+        }
+
+        public ULogoutResp UserLogout(string user)
+        {
+            return UserLogoutAction(user);
+        }
     }
 }

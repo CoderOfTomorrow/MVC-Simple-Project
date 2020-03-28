@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Web.Mvc;
 
 <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark" style="background-color:#950740">
     <div class="collapse navbar-collapse" id="navbarText">
@@ -11,12 +11,24 @@
             </li>
         </ul>
         <ul class="navbar-nav text-md-right">
-            <li class="nav-item" style="text-align:right">
-                <a class="btn btn-outline-light" href="~/Login">Autentificare</a>
-            </li>
-            <li class="nav-item" style="text-align:right">
-                <a class="btn btn-outline-light" href="~/Register">Inregistrare</a>
-            </li>
+            @{if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
+                {
+                    <li class="nav-item" style="text-align:right">
+                        <a class="btn btn-outline-light" href="~/Login">Autentificare</a>
+                    </li>
+                    <li class="nav-item" style="text-align:right">
+                        <a class="btn btn-outline-light" href="~/Register">Inregistrare</a>
+                    </li>
+                }
+                else
+                {
+                    //<h3 style="color:white">Bun venit @Html.DisplayFor(u => u.Credential) | </h3>
+                    <li class="nav-item" style="text-align:right">
+                        <a class="btn btn-outline-light" href="~/Profile">Profil</a>
+                    </li>
+                    <li class="btn btn-outline-light">@Html.ActionLink("Log Off", "Logout", "Login")</li>
+                }
+            }
         </ul>
     </div>
 </nav>

@@ -7,8 +7,8 @@
     <ProjectGuid>{ADD8AF5B-BAB1-4232-B1DE-B45662A7704A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eUseControl.d</RootNamespace>
-    <AssemblyName>eUseControl.d</AssemblyName>
+    <RootNamespace>eUseControl.Domain</RootNamespace>
+    <AssemblyName>eUseControl.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -46,6 +46,7 @@
     <Compile Include="Entites\User\UDbTable.cs" />
     <Compile Include="Entites\User\ULoginData.cs" />
     <Compile Include="Entites\User\ULoginResp.cs" />
+    <Compile Include="Entites\User\ULogoutResp.cs" />
     <Compile Include="Entites\User\URegisterData.cs" />
     <Compile Include="Entites\User\URegisterResp.cs" />
     <Compile Include="Entites\User\UserMinimal.cs" />
@@ -53,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUseControl.H\eUseControl.Helpers.csproj">
+    <ProjectReference Include="..\eUseControl.Helpers\eUseControl.Helpers.csproj">
       <Project>{95cfb784-83df-4c42-bbf3-d29cf0751105}</Project>
       <Name>eUseControl.Helpers</Name>
     </ProjectReference>
