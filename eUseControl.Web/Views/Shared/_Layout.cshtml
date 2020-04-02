@@ -9,12 +9,14 @@
 
     @Styles.Render("~/bundles/bootstrap/css")
 
+    @Styles.Render("~/bundles/style_new/css")
+
     <!-- Add local styles, mostly for plugins css file -->
     @if (IsSectionDefined("Styles"))
     {@RenderSection("Styles", required: false)}
 
     <!-- Primary HOME style -->
-    
+
 </head>
 
 <body style="background-color:#1A1A1D">

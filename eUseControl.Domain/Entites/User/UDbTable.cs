@@ -26,8 +26,8 @@ namespace eUseControl.Domain.Entites.User
         //[StringLength(50, MinimumLength = 8, ErrorMessage = "Email-ul nu poate fi mai lung de 50 de caractere")]
         public string Email { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime LastLogin { get; set; }
+        //[DataType(DataType.DateTime)]
+        //public DateTime LastLogin { get; set; }
 
         [StringLength(30)]
         public string LasIp { get; set; }

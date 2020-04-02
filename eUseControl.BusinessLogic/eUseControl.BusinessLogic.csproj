@@ -58,6 +58,7 @@
     <Compile Include="Core\ApiAdmin.cs" />
     <Compile Include="Core\ApiAuthor.cs" />
     <Compile Include="Core\ApiUser.cs" />
+    <Compile Include="DBModel\ImageContext.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\IRegister.cs" />

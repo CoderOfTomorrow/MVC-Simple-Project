@@ -1,0 +1,54 @@
+﻿@model eUseControl.Web.Models.PImageData
+
+
+<div class="container" style="color:white">
+    <div class="row text-center p-4">
+        @{
+            foreach (var img in Model.ImageList)
+            {
+                 <img src="@Url.Content(img.ImagePath)" title=" " height="200" width="200">
+            }
+        }
+     </div>
+
+   
+
+    @{if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] == "login")
+        {
+            @Html.ValidationSummary(true)
+            using (Html.BeginForm("Add", "Galerie", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row text-center p-4">
+                    <div class="col-md-2">
+
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.AntiForgeryToken()
+                        @Html.LabelFor(model => model.Image.Title, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Image.Title, new
+                        {
+                            placeholder = "...",
+                            value = "",
+                            name = "Title",
+                            id = "Title",
+                            @class = "form-control",
+                        })
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Image.ImagePath, new { @class = "control-label" })
+                        <div class="col-md-3">
+                            <input type="file" name="ImageFile" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <input type="submit" value="Add" class="btn btn-outline-light" />
+                </div>
+            }
+        }
+    }
+</div>
+

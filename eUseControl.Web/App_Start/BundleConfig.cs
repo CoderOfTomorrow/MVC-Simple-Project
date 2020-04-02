@@ -9,6 +9,9 @@ namespace eUseControl.Web.App_Start
             bundles.Add(new StyleBundle("~/bundles/main/css").Include("~/Content/style.css", 
                 new CssRewriteUrlTransform()));
 
+            bundles.Add(new StyleBundle("~/bundles/style_new/css").Include("~/Content/style_new.css",
+                new CssRewriteUrlTransform()));
+
             bundles.Add(new StyleBundle("~/bundles/bootstrap/css").Include("~/Content/bootstrap.min.css",
                 new CssRewriteUrlTransform()));
 

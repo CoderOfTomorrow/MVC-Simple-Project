@@ -45,13 +45,13 @@ namespace eUseControl.BusinessLogic.Core
                     return new ULoginResp { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
-                using (var todo = new UserContext())
+                /*using (var todo = new UserContext())
                 {
                     result.LasIp = data.LoginIp;
                     result.LastLogin = data.LoginDateTime;
                     todo.Entry(result).State = EntityState.Modified;
                     todo.SaveChanges();
-                }
+                }*/
 
                 return new ULoginResp { Status = true };
             }
@@ -68,13 +68,13 @@ namespace eUseControl.BusinessLogic.Core
                     return new ULoginResp { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
-                using (var todo = new UserContext())
+                /*using (var todo = new UserContext())
                 {
                     result.LasIp = data.LoginIp;
                     result.LastLogin = data.LoginDateTime;
                     todo.Entry(result).State = EntityState.Modified;
                     todo.SaveChanges();
-                }
+                }*/
 
                 return new ULoginResp { Status = true };
             }
