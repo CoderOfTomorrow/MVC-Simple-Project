@@ -3,7 +3,6 @@
     public enum URole
     {
         User,
-        Moderator,
         Admin
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace eUseControl.Domain.Entites.User
+namespace eUseControl.Domain.Entites.Topics
 {
-    public class ULoginResp
+    public class CategoryResp
     {
         public bool Status { get; set; }
         public string StatusMsg { get; set; }

@@ -56,13 +56,15 @@
   <ItemGroup>
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Core\ApiAdmin.cs" />
-    <Compile Include="Core\ApiAuthor.cs" />
     <Compile Include="Core\ApiUser.cs" />
     <Compile Include="DBModel\ImageContext.cs" />
     <Compile Include="DBModel\SessionContext.cs" />
+    <Compile Include="DBModel\ForumContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Interfaces\IForum.cs" />
     <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />
+    <Compile Include="LogicBL\ForumBL.cs" />
     <Compile Include="LogicBL\RegisterBL.cs" />
     <Compile Include="LogicBL\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

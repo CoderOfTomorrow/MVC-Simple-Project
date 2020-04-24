@@ -1,0 +1,43 @@
+﻿@model eUseControl.Web.Models.PostData
+
+
+
+<div class="container" style="color:white">
+    @{
+        if (Model.List != null)
+        {
+            foreach (var category in Model.List)
+            {
+                <div class="row text-center p-4">
+                    <div class="alert alert-secondary" role="alert">
+                        Category name - @category
+                    </div>
+                </div>
+            }
+        }
+    }
+    <div class="row">
+        <div class="col-md-3">
+            @Html.ValidationSummary(true)
+            @using (Html.BeginForm("AddCategory", "Topic", FormMethod.Post, new { @id = "PostForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Title, new
+                    {
+                        placeholder = "...",
+                        title = "Introduceti Titlul Categoriei",
+                        value = "",
+                        name = "nume",
+                        id = "nume",
+                        @class = "form-control",
+                        type = "username"
+                    })
+                </div>
+                <button type="submit" class="btn btn-outline-light">Submit</button>
+            }
+        </div>
+     </div>
+</div>
+

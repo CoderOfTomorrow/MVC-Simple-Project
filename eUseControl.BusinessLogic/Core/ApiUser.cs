@@ -7,6 +7,7 @@ using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Domain.Entites.User;
 using eUseControl.Helpers;
 using System.Web;
+using eUseControl.Domain.Entites.Topics;
 
 namespace eUseControl.BusinessLogic.Core
 {
@@ -45,13 +46,13 @@ namespace eUseControl.BusinessLogic.Core
                     return new ULoginResp { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
-                using (var todo = new UserContext())
+                /*using (var todo = new UserContext())
                 {
                     result.LasIp = data.LoginIp;
                     result.LastLogin = data.LoginDateTime;
                     todo.Entry(result).State = EntityState.Modified;
                     todo.SaveChanges();
-                }
+                }*/
 
                 return new ULoginResp { Status = true };
             }
@@ -68,13 +69,13 @@ namespace eUseControl.BusinessLogic.Core
                     return new ULoginResp { Status = false, StatusMsg = "The Username or Password is Incorrect" };
                 }
 
-                using (var todo = new UserContext())
+                /*using (var todo = new UserContext())
                 {
                     result.LasIp = data.LoginIp;
                     result.LastLogin = data.LoginDateTime;
                     todo.Entry(result).State = EntityState.Modified;
                     todo.SaveChanges();
-                }
+                }*/
 
                 return new ULoginResp { Status = true };
             }
@@ -170,6 +171,30 @@ namespace eUseControl.BusinessLogic.Core
                 }
             }
             return new ULogoutResp();
+        }
+
+        internal CategoryResp AddCategoryAction(CategoryData category)
+        {
+            Forum new_category = new Forum();
+            using (var todo = new ForumContext())
+            {
+                new_category.Category = category.Title;
+
+                todo.Forum.Add(new_category);
+                todo.SaveChanges();
+            }
+
+            return new CategoryResp();
+        }
+
+        internal TopicResp AddTopicAction(TopicData topic)
+        {
+            return new TopicResp();
+        }
+
+        internal SubjectResp AddSubjectAction(SubjectData category)
+        {
+            return new SubjectResp();
         }
     }
 }

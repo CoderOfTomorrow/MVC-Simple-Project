@@ -14,5 +14,10 @@ namespace eUseControl.BusinessLogic
         {
             return new RegisterBL();
         }
+
+        public IForum GetForumBL()
+        {
+            return new ForumBL();
+        }
     }
 }

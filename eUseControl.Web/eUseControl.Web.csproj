@@ -289,15 +289,20 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Extension\HttpContextExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ImageData.cs" />
-    <Compile Include="Models\PImageData.cs" />
-    <Compile Include="Models\UserData.cs" />
-    <Compile Include="Models\UserLogin.cs" />
-    <Compile Include="Models\UserRegister.cs" />
+    <Compile Include="Models\Images\ImageData.cs" />
+    <Compile Include="Models\Images\PImageData.cs" />
+    <Compile Include="Models\Posts\PCategoryData.cs" />
+    <Compile Include="Models\Posts\PostData.cs" />
+    <Compile Include="Models\Posts\PSubjectData.cs" />
+    <Compile Include="Models\Posts\PTopicData.cs" />
+    <Compile Include="Models\Users\UserData.cs" />
+    <Compile Include="Models\Users\UserLogin.cs" />
+    <Compile Include="Models\Users\UserRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -325,9 +330,9 @@
     <Content Include="Views\Shared\_Layout_Blank.cshtml" />
     <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Register\index.cshtml" />
-    <Content Include="Views\Home\product.cshtml" />
     <Content Include="Views\Profile\index.cshtml" />
     <Content Include="Views\Galerie\index.cshtml" />
+    <Content Include="Views\Topic\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -44,6 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entites\Images\IDbTable.cs" />
+    <Compile Include="Entites\Topics\CategoryData.cs" />
+    <Compile Include="Entites\Topics\CategoryResp.cs" />
+    <Compile Include="Entites\Topics\SubjectData.cs" />
+    <Compile Include="Entites\Topics\SubjectResp.cs" />
+    <Compile Include="Entites\Topics\Forum.cs" />
+    <Compile Include="Entites\Topics\TopicData.cs" />
+    <Compile Include="Entites\Topics\TopicResp.cs" />
     <Compile Include="Entites\User\Session.cs" />
     <Compile Include="Entites\User\UDbTable.cs" />
     <Compile Include="Entites\User\ULoginData.cs" />
