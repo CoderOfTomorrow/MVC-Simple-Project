@@ -333,6 +333,7 @@
     <Content Include="Views\Profile\index.cshtml" />
     <Content Include="Views\Galerie\index.cshtml" />
     <Content Include="Views\Topic\index.cshtml" />
+    <Content Include="Views\Topic\test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

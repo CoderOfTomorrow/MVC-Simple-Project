@@ -8,6 +8,7 @@ using eUseControl.Domain.Entites.User;
 using eUseControl.Helpers;
 using System.Web;
 using eUseControl.Domain.Entites.Topics;
+using System.Collections.Generic;
 
 namespace eUseControl.BusinessLogic.Core
 {
@@ -179,7 +180,6 @@ namespace eUseControl.BusinessLogic.Core
             using (var todo = new ForumContext())
             {
                 new_category.Category = category.Title;
-
                 todo.Forum.Add(new_category);
                 todo.SaveChanges();
             }
@@ -187,8 +187,20 @@ namespace eUseControl.BusinessLogic.Core
             return new CategoryResp();
         }
 
-        internal TopicResp AddTopicAction(TopicData topic)
+        internal TopicResp AddTopicAction(TopicData topic,int id)
         {
+            using (var db = new ForumContext())
+            {
+                Forum category;
+                category = (from e in db.Forum where e.CategoryID == id select e).FirstOrDefault();
+                if (category.Topics == null)
+                    category.Topics = new List<TopicData>();
+                category.Topics.Add(topic);
+                db.Entry(category).State = EntityState.Modified;
+                db.SaveChanges();
+                
+            }
+
             return new TopicResp();
         }
 

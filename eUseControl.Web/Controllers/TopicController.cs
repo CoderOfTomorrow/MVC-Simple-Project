@@ -1,9 +1,11 @@
-﻿using eUseControl.BusinessLogic.DBModel;
+﻿using AutoMapper;
+using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interfaces;
 using eUseControl.Domain.Entites.Topics;
 using eUseControl.Web.Models;
 using eUseControl.Web.Models.Posts;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -19,35 +21,44 @@ namespace eUseControl.Web.Controllers
             _forum = bl.GetForumBL();
         }
 
-        
         public ActionResult Index()
         {
-            Forum data = new Forum();
-            /*using (ForumContext db = new ForumContext())
+            using (ForumContext db = new ForumContext())
             {
                 if (db.Forum.OrderByDescending(p => p.CategoryID).FirstOrDefault() != null)
                 {
                     Forum last = db.Forum.OrderByDescending(p => p.CategoryID).FirstOrDefault();
                     PostData new_list = new PostData
                     {
-                        List = new List<PCategoryData>()
+                        CList = new List<PCategoryData>()
                     };
 
                     for (int i = 1; i <= last.CategoryID; i++)
                     {
-                        data = db.Forum.Where(x => x.CategoryID == i).FirstOrDefault();
+                        Forum data = (from e in db.Forum where e.CategoryID == i select e).FirstOrDefault();
+                        
+                        Mapper.Initialize(cfg => cfg.CreateMap<Forum, PCategoryData>());
+                        var category = Mapper.Map<PCategoryData>(data);
 
-                        PCategoryData category = data;
-                        new_list.List.Add(category);
+                        data = (from e in db.Forum where e.CategoryID == i select e).Include(d => d.Topics).FirstOrDefault();
+
+                        if (data.Topics != null)
+                            foreach (var top in data.Topics)
+                            {
+                                Mapper.Initialize(cfg => cfg.CreateMap<TopicData, PTopicData>());
+                                var topic = Mapper.Map<PTopicData>(top);
+                                category.Topics.Add(topic);
+                            }
+                        new_list.CList.Add(category);
                     }
                     return View(new_list);
                 }
-            }*/ 
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddCategory(PCategoryData category)
+        public ActionResult AddCategory(PostData category)
         {
             var new_category = new CategoryData()
             {
@@ -60,15 +71,30 @@ namespace eUseControl.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTopic()
+        public ActionResult AddTopic(PostData topic)
         {
-            return View();
+            int id=1;
+            var new_topic = new TopicData()
+            {
+                Title = topic.Title
+            };
+
+            _forum.AddTopic(new_topic,id);
+
+            return RedirectToAction("Index","Topic");
         }
 
         [HttpPost]
-        public ActionResult AddSubject()
+        public ActionResult AddSubject(PSubjectData subject)
         {
-            return View();
+            var new_subject = new SubjectData()
+            {
+                Title = subject.Title
+            };
+
+            //_forum.AddSubject(new_subject);
+
+            return RedirectToAction("Index", "Topic");
         }
     }
 }

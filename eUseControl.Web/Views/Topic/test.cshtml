@@ -1,0 +1,26 @@
+﻿@model eUseControl.Web.Models.PostData
+@{
+    if (Model.CList != null)
+    {
+        foreach (var category in Model.CList)
+        {
+            <div class="row text-center p-4">
+                <div class="alert alert-secondary" role="alert">
+                    Category name - @category.Category
+                </div>
+            </div>
+            if (category.Topics != null)
+            {
+                foreach (var topic in category.Topics)
+                {
+                    <div class="row text-center">
+                        <div class="alert alert-info" role="alert">
+                            Topic name - @topic.Title
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+}
+}

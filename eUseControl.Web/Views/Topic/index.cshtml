@@ -1,21 +1,55 @@
-﻿@model eUseControl.Web.Models.PostData
+﻿@using eUseControl.Web.Models.Posts
+@model eUseControl.Web.Models.PostData
 
 
 
 <div class="container" style="color:white">
     @{
-        if (Model.List != null)
+        if (Model.CList != null)
         {
-            foreach (var category in Model.List)
+            foreach (var category in Model.CList)
             {
                 <div class="row text-center p-4">
                     <div class="alert alert-secondary" role="alert">
-                        Category name - @category
+                        Category name - @category.Category
                     </div>
+                    @Html.ValidationSummary(true)
+                    @using (Html.BeginForm("AddTopic", "Topic", FormMethod.Post, new { @id = "PostForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Title, new
+                            {
+                                placeholder = "...",
+                                title = "Introduceti Titlul Topicului",
+                                value = "",
+                                name = "nume",
+                                id = "nume",
+                                @class = "form-control",
+                                type = "username"
+                            })
+                        </div>
+                        <button type="submit" class="btn btn-outline-light">Submit</button>
+                    
+                    }
                 </div>
+                if (category.Topics != null)
+                {
+                    foreach (var topic in category.Topics)
+                    {
+                                <div class="row text-center">
+                                    <div class="alert alert-info" role="alert">
+                                        Topic name - @topic.Title
+                                    </div>
+                                </div>
+                        }
+                    }
+                }
             }
         }
-    }
+
+    <hr style="background-color:white"/>
     <div class="row">
         <div class="col-md-3">
             @Html.ValidationSummary(true)

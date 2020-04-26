@@ -11,9 +11,9 @@ namespace eUseControl.BusinessLogic.LogicBL
             return AddCategoryAction(category);
         }
 
-        public TopicResp AddTopic(TopicData topic)
+        public TopicResp AddTopic(TopicData topic,int id)
         {
-            return AddTopicAction(topic);
+            return AddTopicAction(topic,id);
         }
 
         public SubjectResp AddSubject(SubjectData subject)
