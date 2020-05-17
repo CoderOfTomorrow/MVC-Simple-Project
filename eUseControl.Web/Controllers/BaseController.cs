@@ -16,7 +16,7 @@ namespace eUseControl.Web.Controllers
             _session = bl.GetSessionBL();
         }
 
-         public void SessionStatus()
+        public void SessionStatus()
         {
             var apiCookie = Request.Cookies["X-KEY"];
             if (apiCookie != null)
@@ -50,6 +50,6 @@ namespace eUseControl.Web.Controllers
         }
 
 
-        
+
     }
 }

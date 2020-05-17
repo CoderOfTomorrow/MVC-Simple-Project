@@ -3,36 +3,41 @@
 <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark" style="background-color:#950740">
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
+            <h3 style="color:white">CoderOfTomorrow</h3>
+        </ul>
+
+        <ul class="navbar-nav text-md-right">
             <li class="nav-item">
-                <a class="nav-link" href="Home">Acasa</a>
+                <a class="nav-link" href="#">Evenimente</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Galerie">Galerie</a>
+                <a class="nav-link" href="#">Noutati</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Despre noi</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Topic">Forum</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Aveti o intrebare?</a>
+                <a class="nav-link" href="Galerie">Galerie</a>
             </li>
-        </ul>
-        <ul class="navbar-nav text-md-right">
+
+
             @{if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] != "login")
                 {
-                    <li class="nav-item" style="text-align:right">
-                        <a class="btn btn-outline-light" href="~/Login">Autentificare</a>
-                    </li>
-                    <li class="nav-item" style="text-align:right">
-                        <a class="btn btn-outline-light" href="~/Register">Inregistrare</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login">Autentificare</a>
                     </li>
                 }
                 else
                 {
-
-                    <li class="nav-item" style="text-align:right">
-                        <a class="btn btn-outline-light" href="~/Profile">Profil</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Profile">Profil</a>
                     </li>
-                    <li class="btn btn-outline-light">@Html.ActionLink("Log Off", "Logout", "Login")</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Login/Logout">Logout</a>
+                    </li>
                 }
             }
         </ul>

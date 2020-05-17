@@ -21,10 +21,5 @@ namespace eUseControl.BusinessLogic.LogicBL
         {
             return Cookie(loginCredential);
         }
-
-        public ULogoutResp UserLogout(string user)
-        {
-            return UserLogoutAction(user);
-        }
     }
 }

@@ -1,5 +1,8 @@
-﻿using eUseControl.BusinessLogic.DBModel;
+﻿using AutoMapper;
+using eUseControl.BusinessLogic.DBModel;
+using eUseControl.BusinessLogic.Interfaces;
 using eUseControl.Domain.Entites.Images;
+using eUseControl.Web.App_Start;
 using eUseControl.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -11,56 +14,49 @@ namespace eUseControl.Web.Controllers
 {
     public class GalerieController : Controller
     {
-        // GET: Galerie
-        public ActionResult Index()
+        private readonly IGalerie _galerie;
+        public GalerieController()
         {
-            IDbTable view_img = new IDbTable();
-            using (ImageContext db =new ImageContext())
-            {
-                if (db.Images.OrderByDescending(p => p.ImageID).FirstOrDefault() != null)
-                {
-                    IDbTable last = db.Images.OrderByDescending(p => p.ImageID).FirstOrDefault();
-                    PImageData new_list = new PImageData
-                    {
-                        ImageList = new List<ImageData>()
-                    };
-                    for (int i = 1; i <= last.ImageID; i++)
-                    {
-                        view_img = db.Images.Where(x => x.ImageID == i).FirstOrDefault();
-                        new_list.ImageList.Add(new ImageData()
-                        {
-                            ImageID = view_img.ImageID,
-                            Title = view_img.Title,
-                            ImagePath = view_img.ImagePath
-                        });
-                    }
-     
-                    return View(new_list);
-                }
-            }
-            return View();
+            var bl = new BusinessLogic.BusinessLogic();
+            _galerie = bl.GetGalerieBL();
         }
 
-        [HttpPost]
+        public ActionResult Index()
+        {
+            var data = _galerie.GetGalerieData();
+
+            PImageData new_list = new PImageData {
+                ImageList = new List<ImageData>()
+            };
+
+            foreach(var img in data)
+            {
+                Mapper.Initialize(cfg => cfg.CreateMap<Image, ImageData>());
+                var local = Mapper.Map<ImageData>(img);
+                new_list.ImageList.Add(local);
+            }
+
+            return View(new_list);
+        }
+
+        [HttpPost][AdminMod]
         public ActionResult Add(PImageData model)
         {
-            var image = new ImageData()
-            {
-                ImageID = model.Image.ImageID,
-                Title = model.Image.Title,
-                ImagePath = model.Image.ImagePath,
-                ImageFile = model.ImageFile
-            };
-            string fileName = Path.GetFileNameWithoutExtension(image.ImageFile.FileName);
-            string extension = Path.GetExtension(image.ImageFile.FileName);
+            string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+            string extension = Path.GetExtension(model.ImageFile.FileName);
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            image.ImagePath = "~/Images/Galerie/" + fileName;
+            model.Image.ImagePath = "~/Images/Galerie/" + fileName;
             fileName = Path.Combine(Server.MapPath("~/Images/Galerie/"), fileName);
-            image.ImageFile.SaveAs(fileName);
+            model.ImageFile.SaveAs(fileName);
 
+
+            
             IDbTable new_img = new IDbTable();
 
-            using(ImageContext db = new ImageContext())
+            Mapper.Initialize(cfg => cfg.CreateMap<ImageData, Image>());
+            var image = Mapper.Map<Image>(model.Image);
+
+            using (ImageContext db = new ImageContext())
             {
                 new_img.ImageID = image.ImageID;
                 new_img.Title = image.Title;
@@ -69,7 +65,7 @@ namespace eUseControl.Web.Controllers
                 db.Images.Add(new_img);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index","Galerie");
+            return RedirectToAction("Index", "Galerie");
         }
     }
 }

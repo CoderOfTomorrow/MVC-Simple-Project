@@ -10,10 +10,7 @@ namespace eUseControl.Domain.Entites.Images
         public int ImageID { get; set; }
 
         public string Title { get; set; }
-
         public string ImagePath { get; set; }
-
-        //public HttpPostedFileBase ImageFile { get; set; }
 
     }
 }

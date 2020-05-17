@@ -62,9 +62,11 @@
     <Compile Include="DBModel\ForumContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\IForum.cs" />
+    <Compile Include="Interfaces\IGalerie.cs" />
     <Compile Include="Interfaces\IRegister.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="LogicBL\ForumBL.cs" />
+    <Compile Include="LogicBL\GalerieBL.cs" />
     <Compile Include="LogicBL\RegisterBL.cs" />
     <Compile Include="LogicBL\SessionBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Linq;
 using System.Web.Mvc;
 using eUseControl.BusinessLogic.Interfaces;
 using eUseControl.Domain.Entites.User;
@@ -12,7 +13,8 @@ namespace eUseControl.Web.Controllers
     {
         private readonly ISession _session;
         // GET: Login
-        public LoginController() {
+        public LoginController()
+        {
             var bl = new BusinessLogic.BusinessLogic();
             _session = bl.GetSessionBL();
         }
@@ -53,9 +55,19 @@ namespace eUseControl.Web.Controllers
             return View();
         }
 
-        public ActionResult Logout(){
-            var user = System.Web.HttpContext.Current.GetMySessionObject();
-            _session.UserLogout(user.Username);
+        public ActionResult Logout()
+        {
+            System.Web.HttpContext.Current.Session.Clear();
+            if (ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("X-KEY"))
+            {
+                var cookie = ControllerContext.HttpContext.Request.Cookies["X-KEY"];
+                if (cookie != null)
+                {
+                    cookie.Expires = DateTime.Now.AddDays(-1);
+                    ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+                }
+            }
+
             return RedirectToAction("Index", "Login");
         }
     }

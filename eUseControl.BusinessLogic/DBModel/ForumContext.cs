@@ -10,5 +10,7 @@ namespace eUseControl.BusinessLogic.DBModel
         }
 
         public virtual DbSet<Forum> Forum { get; set; }
+        public virtual DbSet<FTopic> Topic { get; set; }
+        public virtual DbSet<FSubject> Subject { get; set; }
     }
 }

@@ -1,0 +1,25 @@
+﻿@model eUseControl.Web.Models.PostData
+
+<div class="container" style="color:white">
+    @{
+        <div class="row-cols-2 p-4">
+                    <div class="list-group ">
+                        <li class="list-group-item list-group-item-dark text-center">Category name - @Model.Title</li>
+                        @if (Model.SList != null)
+                        {
+                            foreach (var subject in Model.SList)
+                            {
+                                <a href="#" class="list-group-item list-group-item-action">Topic name - @subject.Title</a>
+                            }
+                        }
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light" type="button">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+</div>

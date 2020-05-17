@@ -10,6 +10,12 @@
     @Styles.Render("~/bundles/bootstrap/css")
 
     @Styles.Render("~/bundles/style_new/css")
+    @Styles.Render("~/bundles/font-awesome/css")
+    @Scripts.Render("~/bundles/jquery/js")
+    @Scripts.Render("~/bundles/bootstrap/js")
+    @RenderSection("scripts", required: false)
+
+
 
     <!-- Add local styles, mostly for plugins css file -->
     @if (IsSectionDefined("Styles"))

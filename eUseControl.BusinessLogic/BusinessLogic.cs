@@ -19,5 +19,10 @@ namespace eUseControl.BusinessLogic
         {
             return new ForumBL();
         }
+
+        public IGalerie GetGalerieBL()
+        {
+            return new GalerieBL();
+        }
     }
 }

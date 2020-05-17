@@ -5,6 +5,7 @@ using System.Linq;
 using AutoMapper;
 using eUseControl.BusinessLogic.DBModel;
 using eUseControl.Domain.Entites.User;
+using eUseControl.Domain.Entites.Images;
 using eUseControl.Helpers;
 using System.Web;
 using eUseControl.Domain.Entites.Topics;
@@ -23,9 +24,9 @@ namespace eUseControl.BusinessLogic.Core
                 new_user.Username = data.Username;
                 new_user.Password = LoginHelper.HashGen(data.Password);
                 new_user.Email = data.Email;
-                
+
                 todo.Users.Add(new_user);
-                todo.SaveChanges();                
+                todo.SaveChanges();
             }
             return new URegisterResp();
         }
@@ -158,28 +159,12 @@ namespace eUseControl.BusinessLogic.Core
             return userminimal;
         }
 
-        internal ULogoutResp UserLogoutAction(string user)
-        {
-            using (var db = new SessionContext())
-            {
-                Session curent;
-                curent = (from e in db.Sessions where e.Username == user select e).FirstOrDefault();
-                curent.ExpireTime = DateTime.Now.AddMinutes(-1);
-                using (var todo = new SessionContext())
-                {
-                    todo.Entry(curent).State = EntityState.Modified;
-                    todo.SaveChanges();
-                }
-            }
-            return new ULogoutResp();
-        }
-
         internal CategoryResp AddCategoryAction(CategoryData category)
         {
             Forum new_category = new Forum();
             using (var todo = new ForumContext())
             {
-                new_category.Category = category.Title;
+                new_category.Title = category.Title;
                 todo.Forum.Add(new_category);
                 todo.SaveChanges();
             }
@@ -187,26 +172,135 @@ namespace eUseControl.BusinessLogic.Core
             return new CategoryResp();
         }
 
-        internal TopicResp AddTopicAction(TopicData topic,int id)
+        internal TopicResp AddTopicAction(TopicData topic, int id)
         {
             using (var db = new ForumContext())
             {
                 Forum category;
                 category = (from e in db.Forum where e.CategoryID == id select e).FirstOrDefault();
                 if (category.Topics == null)
-                    category.Topics = new List<TopicData>();
-                category.Topics.Add(topic);
+                    category.Topics = new List<FTopic>();
+                var top = new FTopic()
+                {
+                    Title = topic.Title
+                };
+                category.Topics.Add(top);
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
-                
+
             }
 
             return new TopicResp();
         }
 
-        internal SubjectResp AddSubjectAction(SubjectData category)
+        internal SubjectResp AddSubjectAction(SubjectData subject,int c_id,int t_id)
         {
+            using (var db = new ForumContext())
+            {
+                Forum category;
+                category = (from e in db.Forum where e.CategoryID == c_id select e).Include(d => d.Topics).FirstOrDefault();
+
+                FTopic topic;
+                topic =    (from e in category.Topics where e.TopicID == t_id select e).FirstOrDefault();
+
+                if (topic.Subjects == null)
+                    topic.Subjects = new List<FSubject>();
+                var sub = new FSubject()
+                {
+                    Title = subject.Title,
+                    Text = subject.Text
+                };
+
+                topic.Subjects.Add(sub);
+                db.Entry(category).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+
             return new SubjectResp();
+        }
+
+        internal List<CategoryData> GetCategoryDataApi()
+        {
+
+            List<Forum> cat;
+            var local = new List<CategoryData>();
+
+            using (ForumContext db = new ForumContext())
+            {
+                cat = db.Forum.Include(d => d.Topics).ToList();
+            }
+
+            foreach (var c in cat)
+            {
+                var l = new CategoryData();
+                var topic = new List<TopicData>();
+
+                l.CategoryID = c.CategoryID;
+                l.Title = c.Title;
+
+                foreach (var t in c.Topics)
+                {
+                    var lt = new TopicData
+                    {
+                        TopicID = t.TopicID,
+                        Title = t.Title
+                    };
+                    topic.Add(lt);
+                }
+                l.Topics = topic;
+                local.Add(l);
+            }
+            return local;
+        }
+
+        internal TopicData GetTopicDataApi(int id)
+        {
+            var local = new TopicData {
+                Subjects = new List<SubjectData>()
+            };
+            using (ForumContext db = new ForumContext())
+            {
+                
+                FTopic topic;
+                topic = (from e in db.Topic where e.TopicID == id select e).Include(d => d.Subjects).FirstOrDefault();
+
+                local.TopicID = topic.TopicID;
+                local.Title = topic.Title;
+                foreach(var sub in topic.Subjects)
+                {
+                    var s = new SubjectData
+                    {
+                        SubjectID = sub.SubjectID,
+                        Title = sub.Title,
+                        Author = sub.Author,
+                        Text = sub.Text
+
+                    };
+                    local.Subjects.Add(s);
+                }
+            }
+
+            return local;
+        }
+
+        internal List<Image> GetGalerieDataApi()
+        {
+            List<IDbTable> img_list;
+            var local = new List<Image>();
+            using (ImageContext db = new ImageContext())
+            {
+                img_list = db.Images.ToList();
+            }
+
+            foreach(var img in img_list)
+            {
+                Mapper.Initialize(cfg => cfg.CreateMap<IDbTable, Image>());
+                var img_min = Mapper.Map<Image>(img);
+                local.Add(img_min);
+            }
+
+            return local;
         }
     }
 }

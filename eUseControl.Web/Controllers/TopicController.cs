@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using eUseControl.BusinessLogic.DBModel;
 using eUseControl.BusinessLogic.Interfaces;
 using eUseControl.Domain.Entites.Topics;
+using eUseControl.Domain.Entites.User;
 using eUseControl.Web.Models;
 using eUseControl.Web.Models.Posts;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace eUseControl.Web.Controllers
@@ -23,38 +21,58 @@ namespace eUseControl.Web.Controllers
 
         public ActionResult Index()
         {
-            using (ForumContext db = new ForumContext())
+            var data = _forum.GetCategoryData();
+            PostData new_forum = new PostData
             {
-                if (db.Forum.OrderByDescending(p => p.CategoryID).FirstOrDefault() != null)
+                CList = new List<PCategoryData>()
+            };
+
+            foreach(var d in data)
+            {
+                var topic = new List<PTopicData>();
+                var cat = new PCategoryData()
                 {
-                    Forum last = db.Forum.OrderByDescending(p => p.CategoryID).FirstOrDefault();
-                    PostData new_list = new PostData
+                    CategoryID = d.CategoryID,
+                    Title = d.Title,
+                    Topics = new List<PTopicData>()
+                };
+
+                foreach(var t in d.Topics)
+                {
+                    var local = new PTopicData()
                     {
-                        CList = new List<PCategoryData>()
+                        TopicID = t.TopicID,
+                        Title = t.Title
                     };
-
-                    for (int i = 1; i <= last.CategoryID; i++)
-                    {
-                        Forum data = (from e in db.Forum where e.CategoryID == i select e).FirstOrDefault();
-                        
-                        Mapper.Initialize(cfg => cfg.CreateMap<Forum, PCategoryData>());
-                        var category = Mapper.Map<PCategoryData>(data);
-
-                        data = (from e in db.Forum where e.CategoryID == i select e).Include(d => d.Topics).FirstOrDefault();
-
-                        if (data.Topics != null)
-                            foreach (var top in data.Topics)
-                            {
-                                Mapper.Initialize(cfg => cfg.CreateMap<TopicData, PTopicData>());
-                                var topic = Mapper.Map<PTopicData>(top);
-                                category.Topics.Add(topic);
-                            }
-                        new_list.CList.Add(category);
-                    }
-                    return View(new_list);
+                    topic.Add(local);
                 }
+                cat.Topics = topic;
+                new_forum.CList.Add(cat);
             }
-            return View();
+
+            return View(new_forum);
+        }
+
+        public ActionResult Topic()
+        {
+            var data = _forum.GetTopicData(1);
+            var new_topic = new PostData
+            {
+                Title = data.Title,
+                SList = new List<PSubjectData>()
+            };
+            foreach(var l in data.Subjects)
+            {
+                var local = new PSubjectData
+                {
+                    SubjectID = l.SubjectID,
+                    Text = l.Text,
+                    Author = l.Author,
+                    Title = l.Title
+                };
+                new_topic.SList.Add(local);
+            };
+            return View(new_topic);
         }
 
         [HttpPost]
@@ -73,7 +91,7 @@ namespace eUseControl.Web.Controllers
         [HttpPost]
         public ActionResult AddTopic(PostData topic)
         {
-            int id=1;
+            var id = topic.Id;
             var new_topic = new TopicData()
             {
                 Title = topic.Title
@@ -85,14 +103,16 @@ namespace eUseControl.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddSubject(PSubjectData subject)
+        public ActionResult AddSubject(PostData subject)
         {
+            var id = 1;
             var new_subject = new SubjectData()
             {
-                Title = subject.Title
+                Title = "Primul subiect",
+                Text = "blablabla"
             };
 
-            //_forum.AddSubject(new_subject);
+            _forum.AddSubject(new_subject,id,1);
 
             return RedirectToAction("Index", "Topic");
         }

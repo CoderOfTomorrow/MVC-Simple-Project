@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entites\Images\IDbTable.cs" />
+    <Compile Include="Entites\Images\Image.cs" />
     <Compile Include="Entites\Topics\CategoryData.cs" />
     <Compile Include="Entites\Topics\CategoryResp.cs" />
+    <Compile Include="Entites\Topics\FSubject.cs" />
+    <Compile Include="Entites\Topics\FTopic.cs" />
     <Compile Include="Entites\Topics\SubjectData.cs" />
     <Compile Include="Entites\Topics\SubjectResp.cs" />
     <Compile Include="Entites\Topics\Forum.cs" />
@@ -55,7 +58,6 @@
     <Compile Include="Entites\User\UDbTable.cs" />
     <Compile Include="Entites\User\ULoginData.cs" />
     <Compile Include="Entites\User\ULoginResp.cs" />
-    <Compile Include="Entites\User\ULogoutResp.cs" />
     <Compile Include="Entites\User\URegisterData.cs" />
     <Compile Include="Entites\User\URegisterResp.cs" />
     <Compile Include="Entites\User\UserMinimal.cs" />

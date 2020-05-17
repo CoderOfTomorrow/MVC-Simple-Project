@@ -3,52 +3,73 @@
 
 <div class="container" style="color:white">
     <div class="row text-center p-4">
-        @{
-            foreach (var img in Model.ImageList)
-            {
-                 <img src="@Url.Content(img.ImagePath)" title=" " height="200" width="200">
-            }
-        }
-     </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
-   
-
-    @{if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] == "login")
-        {
-            @Html.ValidationSummary(true)
-            using (Html.BeginForm("Add", "Galerie", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="row text-center p-4">
-                    <div class="col-md-2">
-
-                    </div>
-
-                    <div class="col-md-4">
-                        @Html.AntiForgeryToken()
-                        @Html.LabelFor(model => model.Image.Title, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.Image.Title, new
+            <div class="carousel-inner h-100">
+                @{int i = 0;}
+                @if (Model.ImageList.Count > 0)
+                {
+                    foreach (var img in Model.ImageList)
+                    {
                         {
-                            placeholder = "...",
-                            value = "",
-                            name = "Title",
-                            id = "Title",
-                            @class = "form-control",
-                        })
-                    </div>
+                            i++;
+                            var active = i == 1 ? "active" : "";
+                            <div class="carousel-item @active">
+                                <img class="img-responsive img-thumbnail align-self-center w-75" src="@Url.Content(img.ImagePath)" alt="First slide">
+                            </div>
 
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Image.ImagePath, new { @class = "control-label" })
-                        <div class="col-md-3">
-                            <input type="file" name="ImageFile" required>
+                        }
+                    }
+                }
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        </div>
+
+
+        @{if ((string)System.Web.HttpContext.Current.Session["LoginStatus"] == "login")
+            {
+                @Html.ValidationSummary(true)
+                using (Html.BeginForm("Add", "Galerie", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="row text-center p-4">
+                        <div class="col-md-2">
+
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.AntiForgeryToken()
+                            @Html.LabelFor(model => model.Image.Title, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Image.Title, new
+                            {
+                                placeholder = "...",
+                                value = "",
+                                name = "Title",
+                                id = "Title",
+                                @class = "form-control",
+                            })
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Image.ImagePath, new { @class = "control-label" })
+                            <div class="col-md-3">
+                                <input type="file" name="ImageFile" required>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-12 text-center">
-                    <input type="submit" value="Add" class="btn btn-outline-light" />
-                </div>
+                    <div class="col-md-12 text-center">
+                        <input type="submit" value="Add" class="btn btn-outline-light" />
+                    </div>
+                }
             }
         }
-    }
-</div>
+    </div>
 
